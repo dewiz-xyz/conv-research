@@ -6,7 +6,6 @@ interface RatesLike {
 }
 
 contract Conv {
-
     address[] public rates;
 
     constructor(address[] memory _rates) {

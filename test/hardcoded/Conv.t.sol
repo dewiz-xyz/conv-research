@@ -12,7 +12,6 @@ import "../../src/hardcoded/repositories/Rates4000To4799.sol";
 import "../../src/hardcoded/repositories/Rates4800To5000.sol";
 
 contract RatesTest is RatesTestBase {
-
     function setUp() public override {
         address[] memory rateAddresses = new address[](7);
         rateAddresses[0] = address(new Rates0To799());

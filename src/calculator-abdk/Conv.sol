@@ -17,20 +17,20 @@ contract Conv {
     /// @return The per-second rate in ray format
     function turn(uint256 basisPoints) public pure returns (uint256) {
         require(basisPoints <= 9899, "Rate cannot exceed 98.99%");
-        
+
         if (basisPoints == 0) {
             return RAY;
         }
-        
+
         int128 yearlyRate = ABDKMath64x64.divu(basisPoints, BASIS_POINTS_SCALE);
-        
+
         int128 onePlusRate = ABDKMath64x64.add(ABDKMath64x64.fromInt(1), yearlyRate);
         int128 lnOnePlusR = ABDKMath64x64.ln(onePlusRate);
-        
+
         int128 perSecond = ABDKMath64x64.div(lnOnePlusR, ABDKMath64x64.fromUInt(SECONDS_PER_YEAR));
-        
+
         uint256 result = ABDKMath64x64.mulu(ABDKMath64x64.exp(perSecond), RAY);
-        
+
         return result < RAY ? RAY : result;
     }
 
@@ -39,7 +39,7 @@ contract Conv {
     /// @return The yearly rate in basis points
     function nrut(uint256 rayRate) public pure returns (uint256) {
         require(rayRate > 0, "Rate must be positive");
-        
+
         if (rayRate == RAY) {
             return 0;
         }

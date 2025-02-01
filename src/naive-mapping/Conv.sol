@@ -11,11 +11,13 @@ contract Conv {
 
         // Start from current length
         uint256 startIndex = rates.length;
-        
+
         // Extend array to accommodate new rates
         for (uint256 i = 0; i < numRates;) {
             rates.push();
-            unchecked { ++i; }
+            unchecked {
+                ++i;
+            }
         }
 
         // Unpack bytes into rates array
@@ -26,16 +28,18 @@ contract Conv {
                 // Skip 4 bytes function selector + 32 bytes offset + 32 bytes length
                 // Then add 12 bytes for each rate
                 let pos := add(68, mul(i, 12))
-                
+
                 // Load 32 bytes starting at our position
                 let word := calldataload(pos)
-                
+
                 // Shift right by 20 bytes (160 bits) to align our 12 bytes
                 // No need to mask as we're already only loading 12 bytes
                 rate := shr(160, word)
             }
             rates[startIndex + i] = rate;
-            unchecked { ++i; }
+            unchecked {
+                ++i;
+            }
         }
     }
 

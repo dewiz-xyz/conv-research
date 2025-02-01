@@ -5,7 +5,6 @@ import "../TestBase.sol";
 import "../../src/optimized-storage/Conv.sol";
 
 contract RatesTest is RatesTestBase {
-
     function setUp() public override {
         conv = ConvLike(address(new Conv()));
     }

@@ -5,7 +5,6 @@ import "../TestBase.sol";
 import "../../src/calculator-abdk/Conv.sol";
 
 contract RatesTest is CalculatorBase {
-
     function setUp() public override {
         conv = ConvLike(address(new Conv()));
     }
