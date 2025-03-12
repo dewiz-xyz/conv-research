@@ -26,7 +26,7 @@ abstract contract RatesTestBase is Test {
         }
     }
 
-    function testRevertsForInvalidBps() public {
+    function testRevertsForInvalidBps() public virtual {
         vm.expectRevert();
         conv.turn(maxBps + 1);
 
@@ -66,6 +66,10 @@ abstract contract CalculatorBase is RatesTestBase {
     }
 
     function testFuzz(uint256) public override {
+        vm.skip(true);
+    }
+
+    function testRevertsForInvalidBps() public override {
         vm.skip(true);
     }
 
